@@ -38,7 +38,25 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+  let spaceDecryption = '**********'
+  let arrayOfEncodedLetters = []
+  let decryptedMessage = ''
+
+  while (expr.length > 0) {
+    arrayOfEncodedLetters.push(expr.substring(0,10));
+    expr = expr.slice(10)
+  }
+
+  arrayOfEncodedLetters.forEach(item => {
+    if(item === spaceDecryption){
+      decryptedMessage += ' '
+    } else {
+      item = item.replace(/00/g,'').replace(/11/g,'-').replace(/10/g,'.');
+      decryptedMessage += MORSE_TABLE[item];
+    }
+  })
+  
+  return decryptedMessage
 }
 
 module.exports = {
